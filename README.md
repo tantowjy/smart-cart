@@ -1,4 +1,4 @@
-<h1 align="center"> SMART CART DOCUMENTATION </h1>
+<h1 align="center">Smart Cart Documentation</h1>
 
 ## Hardware Reference
 - [Object Detection and Distance Measurement](https://github.com/paul-pias/Object-Detection-and-Distance-Measurement)
