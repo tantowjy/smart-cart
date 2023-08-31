@@ -12,6 +12,10 @@
     - Acrylic Clear Case for Jetson Nano
 
 ### Nvidia Jetson Nano Setup
+-    [Get Started With Jetson Nano Developer Kit](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit)
+
+### Nvidia Jetson Nano Camera
+-    [CSI-Camera Python Program](https://github.com/JetsonHacksNano/CSI-Camera)
 
 
 ## AI & DATABASES
