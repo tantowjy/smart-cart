@@ -26,6 +26,8 @@
 
 
 ## SOFTWARE
+https://github.com/NVIDIA-AI-IOT/torch2trt
+https://gilberttanner.com/blog/run-pytorch-models-on-the-jetson-nano-with-tensorrt/
 
 ### App for Mobiles
 
