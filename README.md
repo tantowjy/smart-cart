@@ -11,27 +11,18 @@
 - **_Addition_**
     - Acrylic Clear Case for Jetson Nano
 
-### Nvidia Jetson Nano Setup
+### Hardware Setup and Programming
 -    [Get Started With Jetson Nano Developer Kit](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit)
-
-### Nvidia Jetson Nano Camera
 -    [CSI-Camera Python Program](https://github.com/JetsonHacksNano/CSI-Camera)
+-    [Flutter Setup for Jetson Nano](/Hardware/flutter-jetson.md)
 
 
 ## AI & DATABASES
 
-### Databases
-
-### AI Model
-
 
 ## SOFTWARE
-https://github.com/NVIDIA-AI-IOT/torch2trt
-https://gilberttanner.com/blog/run-pytorch-models-on-the-jetson-nano-with-tensorrt/
-
-### App for Mobiles
-
-### App for Jetson
+-    [PyTorch to TensorRT Converter](https://github.com/NVIDIA-AI-IOT/torch2trt)
+-    [Run PyTorch on Jetson Nano](https://gilberttanner.com/blog/run-pytorch-models-on-the-jetson-nano-with-tensorrt/)
 
 
 ---
