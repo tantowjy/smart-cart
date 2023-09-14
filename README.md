@@ -8,6 +8,7 @@
     - Samsung Evo Plus 64GB UHS-I Class 10
     - Intel 8265NGW Wireless Network Card
     - Power Supply 5V/4A for Jetson Nano
+    - Panda 2D Barcode Scanner PRJ-888 (plug n play hanya butuh setting di device saja)
 - **_Addition_**
     - Acrylic Clear Case for Jetson Nano
 
