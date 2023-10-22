@@ -27,7 +27,7 @@ def gstreamer_pipeline(
     )
 
 
-def face_detect():
+def motion_detect():
     window_title = "Motion Detection"
     video_capture = cv2.VideoCapture(gstreamer_pipeline(), cv2.CAP_GSTREAMER)
     prev_frame = None
@@ -87,4 +87,4 @@ def face_detect():
 
 
 if __name__ == "__main__":
-    face_detect()
+    motion_detect()
