@@ -10,6 +10,7 @@ def gstreamer_pipeline(
     display_height=540,
     framerate=30,
     flip_method=0,
+    sensor_id=0,
 ):
     return (
         "nvarguscamerasrc ! "
