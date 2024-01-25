@@ -10,7 +10,7 @@
    ```
 2. Install essential library for python3.8
    ```bash
-   sudo apt install build-essential libssl-dev zlib1g-dev libncurses5-dev libncursesw-dev libreadline-dev libsqlite3-dev libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev libffi-dev libc6-dev
+   sudo apt install build-essential libssl-dev zlib1g-dev libncurses5-dev libncursesw5-dev libreadline-dev libsqlite3-dev libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev libffi-dev libc6-dev
    ```
 3. Install Python 3.8
    ```bash
@@ -25,4 +25,24 @@
    ```bash
    pip install ultralytics
    ```
-6. 
+
+
+
+---
+- update and upgrade linux systems
+  ```bash
+  sudo apt-get update && sudo apt-get upgrade
+  ```
+- install python3.8
+  ```bash
+  sudo apt install python3.8
+  ```
+- change default python to python 3.8
+  ```bash
+  alias python=/usr/bin/python3.8
+  ```
+- install pip
+  ```bash
+  sudo apt install python-pip
+  ```
+- 
