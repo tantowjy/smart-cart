@@ -1,4 +1,5 @@
 import cv2
+import keyboard
 
 def gstreamer_pipeline(
     capture_width=1920,
@@ -77,7 +78,7 @@ def motion_detect():
                 prev_frame = gray_frame
 
                 # Exit by pressing 'Q'
-                if cv2.waitKey(10) & 0xFF == ord('q'):
+                if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
         finally:
             video_capture.release()
