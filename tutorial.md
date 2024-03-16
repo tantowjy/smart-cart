@@ -45,4 +45,14 @@
   ```bash
   sudo apt install python-pip
   ```
-- 
+
+
+---
+## Tutorial Detection
+```bash
+sudo apt install python3-pip
+pip3 install -U python-dateutil
+pip3 install ultralytics
+pip3 uninstall torch
+pip3 uninstall torchvision
+```
