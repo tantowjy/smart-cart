@@ -1,4 +1,4 @@
-<h1 align="center">TUBI SHOP SMART CART</h1>
+<h1 align="center">Smart Cart</h1>
 
 ## Hardware
 
@@ -17,6 +17,22 @@
 - [CSI-Camera Python Program](https://github.com/JetsonHacksNano/CSI-Camera)
 - [UPS Power Module Battery](https://www.waveshare.com/wiki/UPS_Power_Module)
 
+## Software
 
-## AI Model
-- [AI model for Tubi Shop](https://drive.google.com/drive/folders/1GdGwWAFvuodbxwQXCP1LnTUmCIw7Cq8Z?usp=sharing)
+### Setup Ubuntu 20.04 for Jetson
+1. Download the ISO from this [link](https://github.com/Qengineering/Jetson-Nano-Ubuntu-20-image).
+2. Switch the display manager to LightDM:
+   ```bash
+   sudo dpkg-reconfigure lightdm
+   ```
+3. Increase swap memory allocation:
+   ```bash
+   
+   ```
+4. 
+
+
+## Requirement
+- Python 3.8.10
+- OpenCV 4.8.0
+- Ultralytics 8.0.255
