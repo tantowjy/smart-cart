@@ -1,99 +1,80 @@
 import cv2
-import os
-import keyboard
-import shutil
+import firebase_admin
+import time
+from firebase_admin import credentials, db
 from ultralytics import YOLO
 
-# Clear previous prediction
-if os.path.exists("runs"):
-    shutil.rmtree("./runs")
+# Initialize the Firebase app
+cred = credentials.Certificate('smart-cart-f45d1-firebase.json')
+firebase_admin.initialize_app(cred, {
+	'databaseURL' : 'https://smart-cart-f45d1-default-rtdb.firebaseio.com'
+})
 
-# Model
-# from roboflow import Roboflow
-# rf = Roboflow(api_key="PsVRPB3iBvz752pG3MrN")
-# project = rf.workspace().project("smart-cart-2-fvadu")
-model = YOLO('productmodel_231128.pt')
-names = model.names
+id_customer = str(int(time.time()))
+ref = db.reference(f'detect/{id_customer}/')
+    
+def tubi_detect():
+    video_capture = cv2.VideoCapture(0)
+    prev_frame = None
 
-# Initialize the camera
-cap = cv2.VideoCapture(0)  # Use 0 for default camera
+    if video_capture.isOpened():
+        try:
+            start_time = time.time()
+            object_counts = {}
+            
+            while True:
+                ret, frame = video_capture.read()
 
-# Initialize variables
-prev_frame = None
-motion_direction = None
+                if not ret:
+                    break
 
-while True:
-    motion_detected = False
+                # Convert frame to grayscale for object detection
+                gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    ret, frame = cap.read()
+                # Load a model
+                model = YOLO('yolov8n.pt')  # pretrained YOLOv8n model
 
-    if not ret:
-        break
+                # Run batched inference on a list of images
+                # results = model.predict(source=frame, save_txt=False, project='Object Detection', conf=0.5, iou=0.5)  # return a list of Results objects
+                results = model(frame)
 
-    # Convert frame to grayscale for motion detection
-    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    gray_frame = cv2.GaussianBlur(gray_frame, (21, 21), 0)  # Apply Gaussian blur to reduce noise
+                
+                # Process the results
+                #object_counts = {}
+                for result in results:
+                    for box in result.boxes:
+                        class_id = int(box.data[0][-1])
+                        object_name = model.names[class_id]
+                        # print(object_name)
+                        if object_name in object_counts:
+                            object_counts[object_name] += 1
+                        else:
+                            object_counts[object_name] = 1
+                        
+                
+                for object_name, count in object_counts.items():
+                    print(f"{object_name}: {count}")
+                    ref.child(object_name).set({'count': count})
 
-    if prev_frame is None:
-        prev_frame = gray_frame
-        continue
+                    
+                time.sleep(1)
 
-    # Calculate the absolute difference between the current frame and the previous frame
-    frame_delta = cv2.absdiff(prev_frame, gray_frame)
-    thresh = cv2.threshold(frame_delta, 25, 255, cv2.THRESH_BINARY)[1]
-    thresh = cv2.dilate(thresh, None, iterations=2)
+                # Time for exit
+                elapsed_time = time.time() - start_time
+                if elapsed_time >= 120:  # 2 minutes
+                    print("Program closed after 2 minutes")
+                    break
 
-    # Find contours of moving objects
-    contours, _ = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                # Exit by pressing 'Q'
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
 
-    for contour in contours:
-        if cv2.contourArea(contour) < 1000:  # Adjust this threshold as needed
-            continue
+        finally:
+            video_capture.release()
 
-        (x, y, w, h) = cv2.boundingRect(contour)
-        #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-
-        if y > prev_frame.shape[0] / 2:
-            motion_direction = "Top to Bottom"
-            motion_detected = True
-        else:
-            motion_direction = "Bottom to Top"
-            motion_detected = True
-
-    # Display the frames and motion direction
-    # cv2.putText(frame, f"Motion Direction: {motion_direction}", (10, 30),
-    #             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-    # cv2.imshow("Camera Feed", frame)
-
-    prev_frame = gray_frame
-
-    # Bottom Camera
-    if motion_detected:
-        cv2.imwrite("./images/prediction.jpg", frame)
-
-        print("\nMotion is detected.")
-
-        # infer on a local image
-        prediction = model("./images/prediction.jpg", conf=0.5, save=True)
-        for p in prediction:
-            for c in p.boxes.cls:
-                print("\nPrediction:", names[int(c)])
     else:
-        print("\nNo motion is detected.")
+        print("Unable to open camera")
 
-        # visualize your prediction
-        #model.predict("./images/after.jpg", confidence=40, overlap=30).save("./images/prediction.jpg")
 
-    # source_image_path = './images/after.jpg'
-    # destination_image_path = './images/before.jpg'
-    # shutil.copyfile(source_image_path, destination_image_path)
-
-    # Exit by pressing 'Q'
-    # if cv2.waitKey(1) & 0xFF == ord('q'):
-    #     break
-    if keyboard.is_pressed('q'):
-        print("Exiting the program.")
-        break
-
-cap.release()
-cv2.destroyAllWindows()
+if __name__ == "__main__":
+    tubi_detect()
