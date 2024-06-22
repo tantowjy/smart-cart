@@ -1,8 +1,6 @@
 <h1 align="center">SMART CART</h1>
 
-## Hardware
-
-#### Hardware Component
+## Hardware Component
 - NVIDIA Jetson Nano Development Kit B01
 - IMX219-77 Camera for Jetson Nano
 - LCD Waveshare 7" HDMI IPS Capacitive Touchscreen
@@ -12,15 +10,9 @@
 - UPS Power Module (B)
 - Panda 2D Barcode Scanner PRJ-888
 
-#### Reference
-- [Get Started With Jetson Nano Developer Kit](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit)
-- [IMX219-77 Camera](https://www.waveshare.com/wiki/IMX219-77_Camera)
-- [CSI-Camera Python Program](https://github.com/JetsonHacksNano/CSI-Camera)
-- [UPS Power Module Battery](https://www.waveshare.com/wiki/UPS_Power_Module)
-
 ## Hardware & Environment Setup
 
-#### Ubuntu 20.04 for Jetson
+### Ubuntu 20.04 for Jetson
 1. Download the Linux ISO from this [link](https://github.com/Qengineering/Jetson-Nano-Ubuntu-20-image).
 2. Installing the operating system through the [guide](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit).
 3. Increasing swap memory allocation:
@@ -33,7 +25,7 @@
    sudo reboot
    ```
 
-#### Installing Ultralytics and OpenCV with Gstreamer 
+### Installing Ultralytics and OpenCV with Gstreamer 
 1. Check for updates and upgrades for the Jetson Nano system.
    ```bash
    sudo apt-get update && sudo apt-get upgrade
@@ -113,4 +105,10 @@
     import cv2
     print(cv2.getBuildInformation())
     ```
+
+## Reference
+- [Get Started With Jetson Nano Developer Kit](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit)
+- [IMX219-77 Camera](https://www.waveshare.com/wiki/IMX219-77_Camera)
+- [CSI-Camera Python Program](https://github.com/JetsonHacksNano/CSI-Camera)
+- [UPS Power Module Battery](https://www.waveshare.com/wiki/UPS_Power_Module)
 
